@@ -1,7 +1,10 @@
+import garciadelcastillo.dashedlines.*;
+
 import peasy.*;
 
 Planet[] suns;
 PeasyCam cam;
+DashedLines dash;
 
 PImage sunImg, moonImg, starsBg;
 PShape bgSphere;
@@ -13,7 +16,8 @@ boolean lines = false;
 void setup() {
   // TODO: Spin planets
   
- 
+  dash = new DashedLines(this);
+  dash.pattern(5, 30);
   size(1000, 1000, P3D);
   
   starsBg = loadImage("img/2k_stars.jpg");
@@ -36,21 +40,20 @@ void setup() {
     suns[i].spawnChildren(7, 1);
   }
   
-  lightFalloff(300, 300, 300);
+  lightFalloff(2000, 2000, 2000);
 }
 
 void draw() {
   background(0);
   shape(bgSphere);
   //translate(width / 2, height / 2);
-  
-  lights();
+  ambientLight(100, 100, 100);
   for(Planet sun: suns)
     sun.show();
     
     
   // Draw the suns in bright light 
-  ambientLight(255,255,255);
+  ambientLight(255, 224, 171);
   for (Planet sun: suns) {
     pushMatrix();
     sun.transformScreen();

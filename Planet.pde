@@ -7,6 +7,7 @@ class Planet {
  PVector initialPos, rotateAxis;
  PShape globe;
  PlanetType type;
+ boolean ellipticalOrbit;
  
  Planet(float radius, float distance, PlanetType type) {
    // Initialise variables required for orbit
@@ -14,7 +15,8 @@ class Planet {
    initialPos.mult(distance);
    rotateAxis = initialPos.cross(PVector.random3D());
    orbitSpeed = type == PlanetType.SUN ? 0 : random(-0.1, 0.1);
-   
+   ellipticalOrbit = random(1) < 0.5;
+ 
    // Stats of the planet
    this.radius = radius;
    this.distance = distance;
@@ -60,6 +62,7 @@ class Planet {
    if (type != PlanetType.SUN && lines) drawLines();
    
    // Translate screen for children
+   float distanceMultiplier = angle % PI;
    translate(initialPos.x, initialPos.y, initialPos.z);
  }
  
@@ -82,7 +85,7 @@ class Planet {
    
    float radius = initialPos.mag();
    radius *= 2;
-   ellipse(0,0, radius,radius);
+   dash.ellipse(0,0, radius, ellipticalOrbit? radius : radius);
    popMatrix();
  }
  
@@ -99,7 +102,7 @@ class Planet {
    orbit();
    transformScreen();
    
-   if (type == PlanetType.SUN) pointLight(255, 255, 255, 0,0,0);
+   if (type == PlanetType.SUN) pointLight(255, 224, 145, 0,0,0);
    
    if (children != null) 
      for (int i = 0; i < children.length; i++)
