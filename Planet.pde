@@ -1,3 +1,6 @@
+import java.util.List;
+import java.util.ArrayList;
+
 class Planet {
  float radius, angle, distance, orbitSpeed;
  Planet[] children;
@@ -31,10 +34,11 @@ class Planet {
      case MOON:
        globe.setTexture(moonImg);
    }
+   
  }
  
  void spawnChildren(int number, int level) {
-   if (level >= 3) return;
+   if (level >= 2) return;
    
    children = new Planet[number];
    for (int i = 0; i < number; i++) {
@@ -53,15 +57,33 @@ class Planet {
  
  void transformScreen() {
    rotate(angle, rotateAxis.x, rotateAxis.y, rotateAxis.z);
-   //drawLines();
+   if (type != PlanetType.SUN && lines) drawLines();
    
    // Translate screen for children
    translate(initialPos.x, initialPos.y, initialPos.z);
  }
  
  void drawLines() {
+   pushMatrix();
+   rotate(-angle, rotateAxis.x, rotateAxis.y, rotateAxis.z);
+   
+   PVector faceYou = new PVector(0,0,2000);
+   PVector perp = faceYou.cross(rotateAxis);
+   float rotAngle = PVector.angleBetween(rotateAxis, faceYou);
+   
+   //stroke(255,0,0); //red is facing you
+   //line(0,0,0, faceYou.x, faceYou.y, faceYou.z);
+   //stroke(255,0,255); // purple is rotation axis
+   //line(0,0,0, rotateAxis.x * 100, rotateAxis.y * 100, rotateAxis.z * 100);
+   //stroke(0,255,0); // green is perpendicular to face you and rot axis
+   //line(0,0,0, perp.x * 100, perp.y * 100, perp.z * 100);
    stroke(255);
-   line(0, 0, 0, initialPos.x, initialPos.y, initialPos.z);
+   rotate(rotAngle, perp.x, perp.y, perp.z);
+   
+   float radius = initialPos.mag();
+   radius *= 2;
+   ellipse(0,0, radius,radius);
+   popMatrix();
  }
  
  void drawPlanet() {
