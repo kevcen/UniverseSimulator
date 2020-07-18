@@ -14,8 +14,6 @@ static final int NUM_OF_SUNS = 5;
 boolean lines = false;
 
 void setup() {
-  // TODO: Spin planets
-  
   dash = new DashedLines(this);
   dash.pattern(5, 30);
   size(1000, 1000, P3D);
@@ -37,7 +35,7 @@ void setup() {
   
   for (int i = 0; i < suns.length; i++) {
     suns[i] = new Planet(30, 1500, PlanetType.SUN); //1500
-    suns[i].spawnChildren(7, 1);
+    suns[i].spawnChildren(5, 1);
   }
   
   lightFalloff(2000, 2000, 2000);
@@ -46,8 +44,7 @@ void setup() {
 void draw() {
   background(0);
   shape(bgSphere);
-  //translate(width / 2, height / 2);
-  ambientLight(100, 100, 100);
+  ambientLight(50, 50, 50);
   for(Planet sun: suns)
     sun.show();
     

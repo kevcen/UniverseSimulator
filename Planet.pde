@@ -1,13 +1,10 @@
-import java.util.List;
-import java.util.ArrayList;
-
 class Planet {
- float radius, angle, distance, orbitSpeed;
+ float radius, startAngle, angle, distance, orbitSpeed, spinSpeed, spinAngle, xMax, yMax, zMax;
  Planet[] children;
  PVector initialPos, rotateAxis;
  PShape globe;
  PlanetType type;
- boolean ellipticalOrbit;
+ 
  
  Planet(float radius, float distance, PlanetType type) {
    // Initialise variables required for orbit
@@ -15,13 +12,17 @@ class Planet {
    initialPos.mult(distance);
    rotateAxis = initialPos.cross(PVector.random3D());
    orbitSpeed = type == PlanetType.SUN ? 0 : random(-0.1, 0.1);
-   ellipticalOrbit = random(1) < 0.5;
- 
+   spinSpeed = random(-0.05, 0.05);
+   xMax = 1;
+   yMax = 1;
+   
    // Stats of the planet
    this.radius = radius;
    this.distance = distance;
    this.type = type;
-   angle = random(TWO_PI);
+   startAngle = random(TWO_PI);
+   angle = startAngle;
+   spinAngle = random(TWO_PI);
    
    noStroke();
    noFill();
@@ -54,7 +55,8 @@ class Planet {
  }
  
  void orbit() {
-   angle = angle + orbitSpeed;
+   angle += orbitSpeed;
+   spinAngle += spinSpeed;
  }
  
  void transformScreen() {
@@ -62,8 +64,12 @@ class Planet {
    if (type != PlanetType.SUN && lines) drawLines();
    
    // Translate screen for children
-   float distanceMultiplier = angle % PI;
+   float distanceMultipler = sqrt(sq(yMax * cos(angle-startAngle)) + sq(xMax * sin(angle-startAngle)));
+   initialPos.mult(distanceMultipler);
    translate(initialPos.x, initialPos.y, initialPos.z);
+   initialPos.div(distanceMultipler);
+   
+   rotate(spinAngle, rotateAxis.x, rotateAxis.y, rotateAxis.z);
  }
  
  void drawLines() {
@@ -80,12 +86,14 @@ class Planet {
    //line(0,0,0, rotateAxis.x * 100, rotateAxis.y * 100, rotateAxis.z * 100);
    //stroke(0,255,0); // green is perpendicular to face you and rot axis
    //line(0,0,0, perp.x * 100, perp.y * 100, perp.z * 100);
+   
    stroke(255);
    rotate(rotAngle, perp.x, perp.y, perp.z);
    
    float radius = initialPos.mag();
    radius *= 2;
-   dash.ellipse(0,0, radius, ellipticalOrbit? radius : radius);
+   println(startAngle + ", " + (angle % TWO_PI));
+   dash.ellipse(0,0, xMax * radius, yMax * radius);
    popMatrix();
  }
  
