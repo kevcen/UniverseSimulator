@@ -10,7 +10,7 @@ PImage sunImg, moonImg, starsBg;
 PShape bgSphere;
 PImage[] planetImgs;
 static final int NUM_OF_PLANETS = 4;
-static final int NUM_OF_SUNS = 5;
+static final int NUM_OF_SUNS = 3;
 boolean lines = false;
 
 void setup() {
@@ -29,13 +29,13 @@ void setup() {
   planetImgs[2] = loadImage("img/2k_mercury.jpg");
   planetImgs[3] = loadImage("img/2k_jupiter.jpg");
   
-  cam = new PeasyCam(this, 3000); //3000
-  
+  cam = new PeasyCam(this, 500); //3000
+
   suns = new Planet[NUM_OF_SUNS];
   
   for (int i = 0; i < suns.length; i++) {
-    suns[i] = new Planet(30, 1500, PlanetType.SUN); //1500
-    suns[i].spawnChildren(5, 1);
+    suns[i] = new Planet(30, 1000, PlanetType.SUN); //1500
+    suns[i].spawnChildren(3, 1);
   }
   
   lightFalloff(2000, 2000, 2000);
