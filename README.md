@@ -11,9 +11,9 @@ Simulator of multiple solar systems using Processing 3
   * Peasy Cam library: http://mrfeinberg.com/peasycam/
 
 ## Running
-1. Load up `SolarSystem.pde`, `PlanetType.pde`, `Planet.pde` without creating extra folders.
+1. Load up `UniverseSimulator.pde` onto the Processing 3 IDE (e.g. by double-clicking on the file).
 
-1. Run `SolarSystem.pde` within Processing 3 IDE
+1. Run `UniverseSimulator.pde` within Processing 3 IDE.
 
 ## Additional Features
 Press the up arrow key to see the oribtal path of each celestial body.
