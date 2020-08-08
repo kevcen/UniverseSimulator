@@ -16,6 +16,10 @@ Simulator of multiple solar systems using Processing 3
 1. Run `UniverseSimulator.pde` within Processing 3 IDE.
 
 ## Additional Features
-Press the up arrow key to see the oribtal path of each celestial body.
+* Drag the screen to move your camera.
+
+* Use scroll wheel to zoom in and out.
+
+* Press the up arrow key to see the oribtal path of each celestial body.
 
 ![lines](https://i.imgur.com/AkOlPM8.gif)
