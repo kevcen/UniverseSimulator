@@ -1,7 +1,7 @@
 # UniverseSimulator
 Simulator of multiple solar systems using Processing 3
 
-![demo](https://i.imgur.com/AkOlPM8.gif)
+![demo](https://i.imgur.com/BG7UTwo.gif)
 
 ## Dependencies
 
@@ -17,4 +17,4 @@ Simulator of multiple solar systems using Processing 3
 
 ## Additional Features
 Press the up key to see the oribtal path of each celestial body
-![lines](https://i.imgur.com/BG7UTwo.gif)
+![lines](https://i.imgur.com/AkOlPM8.gif)
