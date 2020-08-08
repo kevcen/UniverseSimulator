@@ -16,5 +16,6 @@ Simulator of multiple solar systems using Processing 3
 1. Run `SolarSystem.pde` within Processing 3 IDE
 
 ## Additional Features
-Press the up key to see the oribtal path of each celestial body
+Press the up arrow key to see the oribtal path of each celestial body.
+
 ![lines](https://i.imgur.com/AkOlPM8.gif)
